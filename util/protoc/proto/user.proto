@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package proto;
+option go_package = "./pb";
+
+
+message PError {
+	string code = 1;
+	int32 http_code = 2;
+	string message = 3;
+	string debug_message = 4;
+}
+
+message PStatus {
+	bool success = 1;
+	PError error = 2;
+}
+
+message IDRequest {
+	int64 id = 1;
+}
+service User {
+  rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse) {}
+}
+
+// GetUserByID
+message GetUserByIDRequest {
+  int64 id = 1;
+}
+
+message GetUserByIDResponse {
+  PStatus status = 1;
+  UserComponent data = 2;
+}
+
+
+message UserComponent {
+  int64 id = 1;
+  optional string username = 3;
+  string email = 4;
+  optional string display_name = 5;
+}

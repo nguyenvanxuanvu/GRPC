@@ -1,0 +1,16 @@
+version: '3'
+services:
+  grpc: 
+    container_name: grpc
+    build:
+      dockerfile: ./Dockerfile
+    volumns:
+      - ../grpc:/grpc:cached
+    command: sleep infinity
+    ports:
+      - 9091:9091
+
+networks:
+  proxynet:
+    driver: bridge
+    
